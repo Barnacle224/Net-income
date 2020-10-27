@@ -1,0 +1,96 @@
+"""
+                                                                     //THIS CODE IS IN PYTHON//
+r_p_d stands for rate per day. The Keys are 'Employment status' and the values are 'Rate per day'
+In thE below functions 'rate per hour' is used by dividing 
+the values of r_p_d by 8
+
+"""
+r_p_d = {'R':800 , 'P':600 , 'C':500 , 'T':450 , 'X':400}
+
+                       #Function for basic pay
+def basic (a):
+    c = r_p_d[es]/8
+    if a>120:
+        return c*120
+    else:
+        return c*a
+
+                        #Function for overtime 
+def overtime (a):
+    if a<120 :
+        print ("Overtime not done")
+        return 0 
+    else:
+        d = (r_p_d[es]/8)*1.5
+        return d*(120-a)
+        
+                          #Function for sss
+def sss (a):
+    if a > 10000:
+        b = (a*10)/100
+        return b
+    elif a>5000 and a<=10000:
+        b = (a*8)/100
+        return b
+    else :
+        b = (a*5)/100
+        return b
+
+                      #Function for philhealth
+def philhealth(a):
+    if a == 'S':
+        return 500 
+    elif a == 'M':
+        return 300 
+    else:
+        return 400 
+
+                      #function for pag_ibig
+def pag_ibig (a):
+    if a > 10000:
+        b = (a*5)/100
+        return b
+    elif a>5000 and a<=10000:
+        b = (a*3)/100
+        return b
+    else :
+        b = (a*2)/100
+        return b
+
+                          #Main body
+                          
+                          
+en = int(input("Enter Employee number :\n"))
+hw = int(input('Enter Hours Work (per hour) :\n'))
+es = input('Enter Employment status :\n')
+es=es.upper()
+print(" Civil status : m - married \n s - single \n o - otherwise")
+cs = input('Enter Civil status ( m or s or o) :\n')
+cs=cs.upper()
+print('\n\n\n\n')
+
+print('Employee number : ' + str(en))
+print('Hours work : '+str(hw))
+print('Employment status :'+ es)
+print('Civil status'+ cs)
+print('Rate per hour : ')
+for i in r_p_d:
+    if es == i:
+        print(r_p_d[i]/8)
+        break 
+GI = basic(hw) + overtime(hw)
+print(' basic :' + str(basic(hw)))
+print('Gross Income : ' + str(GI))
+
+print('SSS : '+ str(sss(GI)))
+print('Philhealth : ' + str(philhealth(cs)))
+print('Pag-ibig : ' + str(pag_ibig(GI)))
+
+deduct = sss(GI) + philhealth(cs) + pag_ibig(GI)
+
+print('Total deduction : ' + str(deduct))
+NI = GI - deduct
+print('net income : ') 
+print(NI)
+
+  
